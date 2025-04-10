@@ -7,7 +7,7 @@ use std::{ops::Range, path::PathBuf};
 // or worry about when we change the dep
 
 #[derive(Clone, Debug, Eq, Hash, PartialEq)]
-pub struct PathString(PathBuf);
+pub struct PathString(pub PathBuf);
 
 impl std::fmt::Display for PathString {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> Result<(), ::std::fmt::Error> {

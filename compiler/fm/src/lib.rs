@@ -19,7 +19,7 @@ use std::{
 pub const FILE_EXTENSION: &str = "nr";
 #[derive(Clone)]
 pub struct FileManager {
-    root: PathBuf,
+    pub root: PathBuf,
     file_map: FileMap,
     id_to_path: HashMap<FileId, PathBuf>,
     path_to_id: HashMap<PathBuf, FileId>,

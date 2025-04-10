@@ -85,11 +85,11 @@ pub struct NodeInterner {
 
     /// This graph tracks dependencies between different global definitions.
     /// This is used to ensure the absence of dependency cycles for globals and types.
-    dependency_graph: DiGraph<DependencyId, ()>,
+    pub dependency_graph: DiGraph<DependencyId, ()>,
 
     /// To keep track of where each DependencyId is in `dependency_graph`, we need
     /// this separate graph to map between the ids and indices.
-    dependency_graph_indices: HashMap<DependencyId, PetGraphIndex>,
+    pub dependency_graph_indices: HashMap<DependencyId, PetGraphIndex>,
 
     // Map each `Index` to it's own location
     pub(crate) id_to_location: HashMap<Index, Location>,
@@ -112,7 +112,7 @@ pub struct NodeInterner {
     // Each type definition is possibly shared across multiple type nodes.
     // It is also mutated through the RefCell during name resolution to append
     // methods from impls to the type.
-    data_types: HashMap<TypeId, Shared<DataType>>,
+    pub data_types: HashMap<TypeId, Shared<DataType>>,
 
     type_attributes: HashMap<TypeId, TypeAttributes>,
 
@@ -120,7 +120,7 @@ pub struct NodeInterner {
     //
     // Map type aliases to the actual type.
     // When resolving types, check against this map to see if a type alias is defined.
-    pub(crate) type_aliases: Vec<Shared<TypeAlias>>,
+    pub type_aliases: Vec<Shared<TypeAlias>>,
 
     // Trait map.
     //
