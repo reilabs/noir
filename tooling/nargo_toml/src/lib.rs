@@ -146,10 +146,10 @@ pub fn get_package_manifest(current_path: &Path) -> Result<PathBuf, ManifestErro
 }
 
 #[derive(Debug, Deserialize, Clone)]
-struct PackageConfig {
-    package: PackageMetadata,
+pub struct PackageConfig {
+    pub package: PackageMetadata,
     #[serde(default)]
-    dependencies: BTreeMap<String, DependencyConfig>,
+    pub dependencies: BTreeMap<String, DependencyConfig>,
 }
 
 impl PackageConfig {
@@ -258,7 +258,7 @@ impl PackageConfig {
 /// Contains all the information about a package, as loaded from a `Nargo.toml`.
 #[derive(Debug, Deserialize, Clone)]
 #[serde(untagged)]
-enum Config {
+pub enum Config {
     /// Represents a `Nargo.toml` with package fields.
     Package {
         #[serde(flatten)]
@@ -288,45 +288,45 @@ impl TryFrom<&str> for Config {
 }
 
 /// Tracks the root_dir of a `Nargo.toml` and the contents inside the file.
-struct NargoToml {
-    root_dir: PathBuf,
-    config: Config,
+pub struct NargoToml {
+    pub root_dir: PathBuf,
+    pub config: Config,
 }
 
 #[derive(Default, Debug, Deserialize, Clone)]
 #[serde(rename_all = "kebab-case")]
-struct WorkspaceConfig {
+pub struct WorkspaceConfig {
     /// List of members in this workspace.
-    members: Vec<PathBuf>,
+    pub members: Vec<PathBuf>,
     /// Specifies the default crate to interact with in the context (similarly to how we have nargo as the default crate in this repository).
-    default_member: Option<PathBuf>,
+    pub default_member: Option<PathBuf>,
 }
 
 #[allow(dead_code)]
 #[derive(Default, Debug, Deserialize, Clone)]
-struct PackageMetadata {
-    name: Option<String>,
-    version: Option<String>,
+pub struct PackageMetadata {
+    pub name: Option<String>,
+    pub version: Option<String>,
     #[serde(alias = "type")]
-    package_type: Option<String>,
-    entry: Option<PathBuf>,
-    description: Option<String>,
-    authors: Option<Vec<String>>,
+    pub package_type: Option<String>,
+    pub entry: Option<PathBuf>,
+    pub description: Option<String>,
+    pub authors: Option<Vec<String>>,
     // If no compiler version is supplied, the latest is used
     // For now, we state that all packages must be compiled under the same
     // compiler version.
     // We also state that ACIR and the compiler will upgrade in lockstep.
     // so you will not need to supply an ACIR and compiler version
-    compiler_version: Option<String>,
-    license: Option<String>,
-    expression_width: Option<String>,
+    pub compiler_version: Option<String>,
+    pub license: Option<String>,
+    pub expression_width: Option<String>,
 }
 
 #[derive(Debug, Deserialize, Clone)]
 #[serde(untagged)]
 /// Enum representing the different types of ways to
 /// supply a source for the dependency
-enum DependencyConfig {
+pub enum DependencyConfig {
     Github { git: String, tag: String, directory: Option<String> },
     Path { path: String },
 }
@@ -453,7 +453,7 @@ fn toml_to_workspace(
     Ok(workspace)
 }
 
-fn read_toml(toml_path: &Path) -> Result<NargoToml, ManifestError> {
+pub fn read_toml(toml_path: &Path) -> Result<NargoToml, ManifestError> {
     let toml_path = toml_path.normalize();
     let toml_as_string = std::fs::read_to_string(&toml_path)
         .map_err(|_| ManifestError::ReadFailed(toml_path.to_path_buf()))?;
