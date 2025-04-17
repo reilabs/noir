@@ -25,6 +25,10 @@ impl Index {
     pub fn unsafe_zeroed() -> Self {
         Self(0)
     }
+
+    pub fn get_usize(&self) -> usize {
+        self.0
+    }
 }
 
 impl fmt::Display for Index {
