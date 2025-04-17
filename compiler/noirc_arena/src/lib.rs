@@ -14,6 +14,10 @@ impl Index {
     pub fn dummy() -> Self {
         Self(usize::MAX)
     }
+
+    pub fn get_usize(&self) -> usize {
+        self.0
+    }
 }
 
 impl fmt::Display for Index {

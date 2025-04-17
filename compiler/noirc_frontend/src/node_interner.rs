@@ -436,6 +436,10 @@ impl GlobalId {
     pub fn dummy_id() -> Self {
         GlobalId(usize::MAX)
     }
+
+    pub fn get_order(&self) -> usize {
+        self.0
+    }
 }
 
 #[derive(Debug, Eq, PartialEq, Hash, Clone, Copy)]
@@ -462,6 +466,10 @@ impl FuncId {
     // after resolution
     pub fn dummy_id() -> FuncId {
         FuncId(Index::dummy())
+    }
+
+    pub fn get_order(&self) -> usize {
+        self.0.get_usize()
     }
 }
 
