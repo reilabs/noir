@@ -454,6 +454,10 @@ impl FuncId {
     pub fn dummy_id() -> FuncId {
         FuncId(Index::dummy())
     }
+
+    pub fn index(&self) -> Index {
+        self.0
+    }
 }
 
 impl fmt::Display for FuncId {
