@@ -92,7 +92,7 @@ pub struct NodeInterner {
     pub dependency_graph_indices: HashMap<DependencyId, PetGraphIndex>,
 
     // Map each `Index` to it's own location
-    pub(crate) id_to_location: HashMap<Index, Location>,
+    pub id_to_location: HashMap<Index, Location>,
 
     // Maps each DefinitionId to a DefinitionInfo.
     definitions: Vec<DefinitionInfo>,
