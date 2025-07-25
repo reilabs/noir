@@ -64,7 +64,7 @@ use super::simple_optimization::SimpleOptimizationContext;
 impl Ssa {
     /// See [`brillig_array_get_and_set`][self] module for more information.
     #[tracing::instrument(level = "trace", skip(self))]
-    pub(crate) fn brillig_array_get_and_set(mut self) -> Ssa {
+    pub fn brillig_array_get_and_set(mut self) -> Ssa {
         for function in self.functions.values_mut() {
             function.brillig_array_get_and_set();
         }

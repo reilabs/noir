@@ -74,7 +74,7 @@ impl<'a> SsaPass<'a> {
 // This is just a convenience object to bundle the ssa with `print_ssa_passes` for debug printing.
 pub struct SsaBuilder<'local> {
     /// The SSA being built; it is the input and the output of every pass ran by the builder.
-    ssa: Ssa,
+    pub ssa: Ssa,
     /// Options to control which SSA passes to print.
     ssa_logging: SsaLogging,
     /// Whether to print the amount of time it took to run individual SSA passes.

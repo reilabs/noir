@@ -79,7 +79,7 @@ impl Default for RuntimeType {
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Function {
     /// The first basic block in the function
-    entry_block: BasicBlockId,
+    pub entry_block: BasicBlockId,
 
     /// Name of the function for debugging only
     name: String,
@@ -88,7 +88,7 @@ pub struct Function {
 
     /// The DataFlowGraph holds the majority of data pertaining to the function
     /// including its blocks, instructions, and values.
-    pub(crate) dfg: DataFlowGraph,
+    pub dfg: DataFlowGraph,
 }
 
 impl Function {
@@ -166,14 +166,14 @@ impl Function {
 
     /// Returns the parameters of this function.
     /// The parameters will always match that of this function's entry block.
-    pub(crate) fn parameters(&self) -> &[ValueId] {
+    pub fn parameters(&self) -> &[ValueId] {
         self.dfg.block_parameters(self.entry_block)
     }
 
     /// Returns the return types of this function.
     /// None might be returned if the function ends up with all of its block
     /// terminators being `jmp`, `jmpif` or `unreachable`.
-    pub(crate) fn returns(&self) -> Option<&[ValueId]> {
+    pub fn returns(&self) -> Option<&[ValueId]> {
         for block in self.reachable_blocks() {
             let terminator = self.dfg[block].terminator();
             if let Some(TerminatorInstruction::Return { return_values, .. }) = terminator {
@@ -282,7 +282,7 @@ pub fn function_values_iter(func: &Function) -> impl DoubleEndedIterator<Item = 
 ///
 /// This Id is how each function refers to other functions
 /// within Call instructions.
-pub(crate) type FunctionId = Id<Function>;
+pub type FunctionId = Id<Function>;
 
 #[derive(Debug, Default, Clone, PartialEq, Eq, Hash, Ord, PartialOrd)]
 pub(crate) struct Signature {

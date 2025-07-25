@@ -70,11 +70,11 @@ impl std::fmt::Display for BinaryOp {
 #[derive(Debug, PartialEq, Eq, Hash, Clone, Serialize, Deserialize)]
 pub struct Binary {
     /// Left hand side of the binary operation
-    pub(crate) lhs: ValueId,
+    pub lhs: ValueId,
     /// Right hand side of the binary operation
-    pub(crate) rhs: ValueId,
+    pub rhs: ValueId,
     /// The binary operation to apply
-    pub(crate) operator: BinaryOp,
+    pub operator: BinaryOp,
 }
 
 impl Binary {

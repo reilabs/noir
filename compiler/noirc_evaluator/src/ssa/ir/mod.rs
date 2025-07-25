@@ -1,7 +1,7 @@
 pub mod basic_block;
 pub(crate) mod call_graph;
 pub(crate) mod cfg;
-pub(crate) mod dfg;
+pub mod dfg;
 pub(crate) mod dom;
 pub mod function;
 pub(crate) mod function_inserter;

@@ -35,7 +35,7 @@ use crate::ssa::{
 
 impl Ssa {
     /// See [`remove_unreachable`][self] module for more information.
-    pub(crate) fn remove_unreachable_functions(mut self) -> Self {
+    pub fn remove_unreachable_functions(mut self) -> Self {
         let reachable_functions = reachable_functions(&self);
 
         // Discard all functions not marked as reachable
@@ -253,13 +253,13 @@ mod tests {
             v5 = call v4(v0) -> Field
             return
         }
-        
+
         acir(inline) fn my_fun f1 {
           b0(v0: Field):
             v2 = add v0, Field 1
             return v2
         }
-        
+
         acir(inline) fn my_fun2 f2 {
           b0(v0: Field):
             v2 = add v0, Field 2
