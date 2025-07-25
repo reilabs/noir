@@ -824,7 +824,7 @@ pub(crate) enum InstructionResultType {
 /// to split up instructions like this, as we are sure that these instructions
 /// will not be in the list of instructions for a basic block.
 #[derive(Debug, PartialEq, Eq, Hash, Clone, Serialize, Deserialize)]
-pub(crate) enum TerminatorInstruction {
+pub enum TerminatorInstruction {
     /// Control flow
     ///
     /// Jump If

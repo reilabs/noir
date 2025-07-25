@@ -27,7 +27,7 @@ use super::simple_optimization::SimpleOptimizationContext;
 
 impl Ssa {
     #[tracing::instrument(level = "trace", skip(self))]
-    pub(crate) fn brillig_array_get_and_set(mut self) -> Ssa {
+    pub fn brillig_array_get_and_set(mut self) -> Ssa {
         let brillig_functions =
             self.functions.values_mut().filter(|function| function.runtime().is_brillig());
         for function in brillig_functions {

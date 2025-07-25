@@ -34,14 +34,14 @@ pub(crate) mod simplify;
 /// shared without worrying about ownership.
 #[serde_as]
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
-pub(crate) struct DataFlowGraph {
+pub struct DataFlowGraph {
     /// Runtime of the [function][super::function::Function] that owns this [DataFlowGraph].
     /// This might change during the `runtime_separation` pass where
     /// ACIR functions are cloned as Brillig functions.
     runtime: RuntimeType,
 
     /// All of the instructions in a function
-    instructions: DenseMap<Instruction>,
+    pub instructions: DenseMap<Instruction>,
 
     /// Stores the results for a particular instruction.
     ///
@@ -53,11 +53,11 @@ pub(crate) struct DataFlowGraph {
     /// Call instructions require the func signature, but
     /// other instructions may need some more reading on my part
     #[serde_as(as = "HashMap<DisplayFromStr, _>")]
-    results: HashMap<InstructionId, smallvec::SmallVec<[ValueId; 1]>>,
+    pub results: HashMap<InstructionId, smallvec::SmallVec<[ValueId; 1]>>,
 
     /// Storage for all of the values defined in this
     /// function.
-    values: DenseMap<Value>,
+    pub values: DenseMap<Value>,
 
     /// Each constant is unique, attempting to insert the same constant
     /// twice will return the same ValueId.
@@ -83,7 +83,7 @@ pub(crate) struct DataFlowGraph {
     foreign_functions: HashMap<String, ValueId>,
 
     /// All blocks in a function
-    blocks: DenseMap<BasicBlock>,
+    pub blocks: DenseMap<BasicBlock>,
 
     /// Source location of each instruction for debugging and issuing errors.
     ///
@@ -195,7 +195,7 @@ impl DataFlowGraph {
     /// block's id.
     ///
     /// The pairs are order by id, which is not guaranteed to be meaningful.
-    pub(crate) fn basic_blocks_iter(
+    pub fn basic_blocks_iter(
         &self,
     ) -> impl DoubleEndedIterator<Item = (BasicBlockId, &BasicBlock)> {
         self.blocks.iter()
@@ -561,7 +561,7 @@ impl DataFlowGraph {
     }
 
     /// Returns all of result values which are attached to this instruction.
-    pub(crate) fn instruction_results(&self, instruction_id: InstructionId) -> &[ValueId] {
+    pub fn instruction_results(&self, instruction_id: InstructionId) -> &[ValueId] {
         self.results.get(&instruction_id).expect("expected a list of Values").as_slice()
     }
 

@@ -174,7 +174,7 @@ fn id_from_str_helper<T>(s: &str, value_prefix: char) -> Result<Id<T>, IdDisplay
 /// to indices in the internal Vec, operations that would change element
 /// ordering like pop, remove, swap_remove, etc, are not possible.
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub(crate) struct DenseMap<T> {
+pub struct DenseMap<T> {
     storage: Vec<T>,
 }
 
@@ -190,7 +190,7 @@ impl<T> DenseMap<T> {
     /// Gets an iterator to a reference to each element in the dense map paired with its id.
     ///
     /// The id-element pairs are ordered by the numeric values of the ids.
-    pub(crate) fn iter(&self) -> impl DoubleEndedIterator<Item = (Id<T>, &T)> {
+    pub fn iter(&self) -> impl DoubleEndedIterator<Item = (Id<T>, &T)> {
         let ids_iter = (0..self.storage.len() as u32).map(|idx| Id::new(idx));
         ids_iter.zip(self.storage.iter())
     }

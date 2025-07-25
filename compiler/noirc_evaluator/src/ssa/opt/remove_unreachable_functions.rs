@@ -33,7 +33,7 @@ use crate::ssa::{
 
 impl Ssa {
     /// See [`remove_unreachable`][self] module for more information.
-    pub(crate) fn remove_unreachable_functions(mut self) -> Self {
+    pub fn remove_unreachable_functions(mut self) -> Self {
         // Identify entry points
         let entry_points = self.functions.iter().filter_map(|(&id, func)| {
             // Not using `Ssa::is_entry_point` because it could leave Brillig functions that nobody calls in the SSA,

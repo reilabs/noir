@@ -15,16 +15,16 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, PartialEq, Eq, Hash, Clone, Serialize, Deserialize)]
 pub struct BasicBlock {
     /// Parameters to the basic block.
-    parameters: Vec<ValueId>,
+    pub parameters: Vec<ValueId>,
 
     /// Instructions in the basic block.
-    instructions: Vec<InstructionId>,
+    pub instructions: Vec<InstructionId>,
 
     /// The terminating instruction for the basic block.
     ///
     /// This will be a control flow instruction. This is only
     /// None if the block is still being constructed.
-    terminator: Option<TerminatorInstruction>,
+    pub terminator: Option<TerminatorInstruction>,
 }
 
 /// An identifier for a Basic Block.
@@ -38,7 +38,7 @@ impl BasicBlock {
     }
 
     /// Returns the parameters of this block
-    pub(crate) fn parameters(&self) -> &[ValueId] {
+    pub fn parameters(&self) -> &[ValueId] {
         &self.parameters
     }
 
@@ -66,7 +66,7 @@ impl BasicBlock {
     }
 
     /// Retrieve a reference to all instructions in this block.
-    pub(crate) fn instructions(&self) -> &[InstructionId] {
+    pub fn instructions(&self) -> &[InstructionId] {
         &self.instructions
     }
 
@@ -92,7 +92,7 @@ impl BasicBlock {
     /// Returns the terminator of this block.
     ///
     /// Once this block has finished construction, this is expected to always be Some.
-    pub(crate) fn terminator(&self) -> Option<&TerminatorInstruction> {
+    pub fn terminator(&self) -> Option<&TerminatorInstruction> {
         self.terminator.as_ref()
     }
 

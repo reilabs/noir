@@ -745,7 +745,7 @@ impl<'local> SsaBuilder<'local> {
     }
 
     /// Run a list of SSA passes.
-    fn run_passes(mut self, passes: &[SsaPass]) -> Result<Self, RuntimeError> {
+    pub fn run_passes(mut self, passes: &[SsaPass]) -> Result<Self, RuntimeError> {
         for pass in passes {
             self = self.try_run_pass(|ssa| pass.run(ssa), pass.msg)?;
         }
